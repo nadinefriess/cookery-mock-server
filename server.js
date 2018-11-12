@@ -11,7 +11,13 @@ const router = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/recipes");
+// DeprecationWarning: current URL string parser is deprecated,
+// and will be removed in a future version. To use the new parser,
+// pass option { useNewUrlParser: true } to MongoClient.connect.
+mongoose.connect(
+  "mongodb://localhost:27017/recipes",
+  { useNewUrlParser: true }
+);
 
 const connection = mongoose.connection;
 connection.once("open", () => {
